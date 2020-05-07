@@ -16,8 +16,8 @@ module load samtools
 # Your commands
 cd /home/ytcheung/genome_analysis/analyses/04_assembly_correction/
 bwa index -p pacbio_index \
-	../02_genome_assembly/PacBio/efaecium.contigs.fasta
+	../02_genome_assembly/PacBio/efaecium_canu.contigs.fasta
 bwa mem -M pacbio_index \
-	/home/ytcheung/genome_analysis/data/raw_data/genomics_data/Illumina/E745-1.L500_SZAXPI015146-56_1_clean.fq.gz \
-	/home/ytcheung/genome_analysis/data/raw_data/genomics_data/Illumina/E745-1.L500_SZAXPI015146-56_2_clean.fq.gz > alignment.sam
-samtools sort -o alignment_sorted.bam alignment.sam
+	/home/ytcheung/genome_analysis/data/trimmed_illumina/E745_trimmed_1_paired.fq.gz \
+	/home/ytcheung/genome_analysis/data/trimmed_illumina/E745_trimmed_2_paired.fq.gz > pacbio_illumina_alignment.sam
+samtools sort -o pacbio_illumina_alignment_sorted.bam pacbio_illumina_alignment.sam

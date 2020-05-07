@@ -14,8 +14,8 @@ module load spades
 
 # Your commands
 cd /home/ytcheung/genome_analysis/
-spades.py -1 ./data/raw_data/genomics_data/Illumina/E745-1.L500_SZAXPI015146-56_1_clean.fq.gz \
-	-2 ./data/raw_data/genomics_data/Illumina/E745-1.L500_SZAXPI015146-56_2_clean.fq.gz \
+spades.py -1 ./data/trimmed_illumina/E745_trimmed_1_paired.fq.gz \
+	-2 ./data/trimmed_illumina/E745_trimmed_2_paired.fq.gz \
 	--nanopore ./data/raw_data/genomics_data/Nanopore/E745_all.fasta.gz \
         -o ./analyses/02_genome_assembly/Illumina_and_Nanopore/ \
 	-k 55,67,77
