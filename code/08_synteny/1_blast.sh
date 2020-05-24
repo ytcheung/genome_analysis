@@ -15,6 +15,6 @@ module load blast
 # Your commands
 cd /home/ytcheung/genome_analysis/analyses/08_synteny/
 
-blastn -num_threads 2 -query ../04_assembly_correction/pilon/pilon_small_contigs.fasta \
+blastn -num_threads 2 -query ../04_assembly_correction/pilon/pilon.fasta \
 	-subject ../../data/raw_data/E_faecium_DO.fna \
 	-outfmt 6 -out ../08_synteny/blast_synteny.out
