@@ -1,0 +1,56 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Ctrl+Shift+Enter*. 
+
+Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by pressing *Ctrl+Alt+I*.
+
+When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the *Preview* button or press *Ctrl+Shift+K* to preview the HTML file).
+```{r}
+if (!requireNamespace("BiocManager", quietly = TRUE))
+  install.packages("BiocManager")
+BiocManager::install("DESeq2", version = "3.9")
+```
+
+```{r}
+library("DESeq2")
+
+directory <- "C:\\Users\\Chris\\Desktop\\rna count"
+sampleFiles <- c('trim_paired_ERR1797972_counts.txt', 'trim_paired_ERR1797973_counts.txt', 'trim_paired_ERR1797974_counts.txt', 'trim_paired_ERR1797969_counts.txt', 'trim_paired_ERR1797970_counts.txt', 'trim_paired_ERR1797971_counts.txt')
+condition <- c('BH','BH','BH','Serum','Serum','Serum')
+
+sampleTable <- data.frame(sampleName = sampleFiles,
+                      fileName = sampleFiles,
+                      condition = condition)
+
+ddsHTSeq <- DESeqDataSetFromHTSeqCount(sampleTable = sampleTable,
+                                   directory = directory,
+                                   design= ~ condition)
+ddsHTSeq
+```
+
+# Keep only rows that have at least 10 reads total
+```{r}
+keep <- rowSums(counts(ddsHTSeq)) >= 10
+ddsHTSeq <- ddsHTSeq[keep,]
+```
+
+# specifying the reference level
+```{r}
+ddsHTSeq$condition <- relevel(ddsHTSeq$condition, ref = "BH")
+```
+
+# Differential expression analysis
+```{r}
+dds <- DESeq(ddsHTSeq)
+res <- results(dds)
+res
+```
+# Log fold change shrinkage for visualization and ranking
+```{r}
+
+```
+
+
