@@ -1,0 +1,41 @@
+---
+title: "R Mapping and Counting Statistics"
+output: html_notebook
+---
+
+This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
+
+Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Ctrl+Shift+Enter*. 
+
+```{r}
+setwd('C:\\Users\\Chris\\Desktop\\rna count')
+
+bh1 <- read.table("trim_paired_ERR1797972_counts.txt", row.names = 1, col.names = c('gene', 'ERR1797972'))
+bh2 <- read.table("trim_paired_ERR1797973_counts.txt", row.names = 1, col.names = c('gene', 'ERR1797973'))
+bh3 <- read.table("trim_paired_ERR1797974_counts.txt", row.names = 1, col.names = c('gene', 'ERR1797974'))
+serum1 <- read.table("trim_paired_ERR1797969_counts.txt", row.names = 1, col.names = c('gene', 'ERR1797969'))
+serum2 <- read.table("trim_paired_ERR1797970_counts.txt", row.names = 1, col.names = c('gene', 'ERR1797970'))
+serum3 <- read.table("trim_paired_ERR1797971_counts.txt", row.names = 1, col.names = c('gene', 'ERR1797971'))
+
+df <- data.frame(bh1, bh2, bh3, serum1, serum2, serum3)
+
+line_count<-dim(df)[1]
+
+df_features_only<-countData[1:(line_count-5),]
+
+total_pairs <- colSums(df)
+total_pairs
+total_pairs_feature <- colSums(df_features_only)
+total_pairs_feature
+
+sum_pairs <- sum(total_pairs)
+sum_pairs_feature <- sum(total_pairs_feature)
+
+percentage_of_reads_mapped_to_genes <- (sum_pairs_feature/sum_pairs)*100
+percentage_of_reads_mapped_to_genes
+```
+
+```{r}
+pairs_not_mapped <- sum_pairs - sum_pairs_feature
+pairs_not_mapped
+```
