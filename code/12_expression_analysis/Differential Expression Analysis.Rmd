@@ -96,3 +96,9 @@ rownames(df) = colnames(mat)
 pheatmap(mat, annotation_col=df)
 ```
 
+# PCA Plot
+```{r}
+rlog_dds <- rlog(dds)
+plotPCA(rlog_dds)
+```
+
