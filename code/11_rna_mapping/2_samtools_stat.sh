@@ -20,4 +20,5 @@ cat ../../data/raw_data/rna_file_list.txt | while read line
 do
 	samtools index "./"$line"_pilon_alignment_sorted.bam"
 	samtools idxstats "./"$line"_pilon_alignment_sorted.bam" > "./"$line"_stats.txt"
+	samtools flagstat "./"$line"_pilon_alignment_sorted.bam" > "./"$line"_flagstat.txt"
 done
