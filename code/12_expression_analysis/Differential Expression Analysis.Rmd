@@ -21,7 +21,7 @@ BiocManager::install("pheatmap")
 library("DESeq2")
 
 directory <- "C:/Users/Chris/Desktop/rna count"
-sampleFiles <- c('trim_paired_ERR1797972_counts.txt', 'trim_paired_ERR1797973_counts.txt', 'trim_paired_ERR1797974_counts.txt', 'trim_paired_ERR1797969_counts.txt', 'trim_paired_ERR1797970_counts.txt', 'trim_paired_ERR1797971_counts.txt')
+sampleFiles <- c('ERR1797972_counts.txt', 'ERR1797973_counts.txt', 'ERR1797974_counts.txt', 'ERR1797969_counts.txt', 'ERR1797970_counts.txt', 'ERR1797971_counts.txt')
 condition <- c('BH','BH','BH','Serum','Serum','Serum')
 
 sampleTable <- data.frame(sampleName = sampleFiles,
@@ -89,7 +89,7 @@ library("pheatmap")
 
 rld <- rlog(dds, blind=FALSE)
 
-mat = assay(rld)[ head(order(res$padj),10), ]  
+mat = assay(rld)[ head(order(res$padj),20), ]  
 df = as.data.frame(colData(rld)[,c("condition")])
 colnames(df) = "condition"
 rownames(df) = colnames(mat)
